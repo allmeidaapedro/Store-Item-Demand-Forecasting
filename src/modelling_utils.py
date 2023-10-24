@@ -295,7 +295,7 @@ def plot_predictions(testing_dates, y_test, y_pred):
         raise CustomException(e, sys)
     
 
-def create_time_series_features(data, target, to_sort, to_group, lags, rolls, roll_mean, roll_std, roll_min, roll_max, date_related=True, log_transformation=False, lag=False, roll=False, ewm=False):
+def create_time_series_features(data, target, to_sort=None, to_group=None, lags=None, windows=None, weights=None, min_periods=None, win_type=None, date_related=True, lag=False, log_transformation=False, roll=False, ewm=False, roll_mean=False, roll_std=False, roll_min=False, roll_max=False):
     try:
         df = data.copy()
 
@@ -319,7 +319,6 @@ def create_time_series_features(data, target, to_sort, to_group, lags, rolls, ro
         # Creating lag features.
         if lag:
             df.sort_values(by=to_sort, axis=0, inplace=True)
-
             for lag in lags:
                 df['sales_lag_' + str(lag)] = df.groupby(to_group)[target].transform(lambda x: x.shift(lag))
         
@@ -328,12 +327,25 @@ def create_time_series_features(data, target, to_sort, to_group, lags, rolls, ro
             df.sort_values(by=to_sort, axis=0, inplace=True)
 
             if roll_mean:
-                
+                for window in windows:
+                    df['sales_roll_mean_' + str(window)] = df.groupby(to_group)[target].transform(lambda x: x.shift(1).rolling(window=window, min_periods=min_periods, win_type=win_type).mean())
+            if roll_std:
+                for window in windows:
+                    df['sales_roll_std_' + str(window)] = df.groupby(to_group)[target].transform(lambda x: x.shift(1).rolling(window=window, min_periods=min_periods, win_type=win_type).std())
+            if roll_min:
+                for window in windows:
+                    df['sales_roll_min_' + str(window)] = df.groupby(to_group)[target].transform(lambda x: x.shift(1).rolling(window=window, min_periods=min_periods, win_type=win_type).min())
+            if roll_max:
+                for window in windows:
+                    df['sales_roll_max_' + str(window)] = df.groupby(to_group)[target].transform(lambda x: x.shift(1).rolling(window=window, min_periods=min_periods, win_type=win_type).max())
 
-
-
+        # Creating exponentially weighted mean features.
+        if ewm:
+            for weight in weights:
+                    for lag in lags:
+                        df['sales_ewm_w_' + str(weight) + '_lag_' + str(lag)] = df.groupby(to_group)[target].transform(lambda x: x.shift(lag).ewm(alpha=weight).mean())
             
-
+        return df
 
     except Exception as e:
         raise CustomException(e, sys)
