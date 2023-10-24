@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import mean_absolute_error, mean_squared_error, mean_absolute_percentage_error, r2_score
 
-# Sys.
+# Sys and exception.
 import sys
 
 # Utils.
