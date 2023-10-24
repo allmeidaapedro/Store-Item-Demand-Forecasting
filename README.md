@@ -45,7 +45,7 @@ The following pipeline was used, based on CRISP-DM framework
 
 Each of these steps is approached in detail inside the notebooks.
 
-<img src="reports/CRISP-DM.png">
+<img src="reports/crispdm.png">
 
 # 6. Main business insights
 1. The sales present and increasing trend over the years. Seasonality is also present, the sales are higher around july.
