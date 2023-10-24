@@ -63,3 +63,8 @@ Each of these steps is approached in detail inside the notebooks.
 4. Items 28 and 15 are the most sold ones.
 
 <img src="reports/sales_item.png">
+
+# 7. Modelling
+1. Initially, having the data sorted by date, store and item, I did a time series train-test-split (in chronological order, ensuring that the model is trained with past data points and predicts on future data points). Once the objective was to forecast 3 months of sales, I separated 3 months for test. Finally, I did this at the beginning of the project to isolate test set, using it just for final model evaluation, simulating a real life production environment.
+
+<img src="reports/time_series_split.png">
