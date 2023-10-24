@@ -89,6 +89,10 @@ Each of these steps is approached in detail inside the notebooks.
 
 9. Once I had my final tuned model, I evaluated its results obtaining regression metrics, observing actual vs predicted values and residual plots. The mean absolute error (MAE) told us that our model's predictions, on average, are off by approximately 6.1 units of the target variable (sales). This is excellent, considering that the sales range from 0 to 231, with an average value of 52.25. Moreover, the train, validation and test RMSE scores were compared and they are very similar, validating that the model was not overfitting the training data and thus, will generalize well for new unseen instances.
 
+|        | Model    | MAE     | MAPE    | RMSE   | R2     |
+|--------|----------|---------|---------|--------|--------|
+| Results| LightGBM | 6.0958  | 13.2804 | 7.9709 | 0.9222 |
+
 <img src="reports/actual_pred_graph_lgb.png">
 <img src="reports/residuals_dist_lgb.png">
 <img src="reports/actual_pred_lgb.png">
