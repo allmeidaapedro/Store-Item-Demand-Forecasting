@@ -45,35 +45,51 @@ The following pipeline was used, based on CRISP-DM framework
 
 Each of these steps is approached in detail inside the notebooks.
 
+CRISP-DM framework
+
 <img src="reports/crispdm.jpg" width=600px height=350px>
 
 # 6. Main business insights
 1. The sales present and increasing trend over the years. Seasonality is also present, the sales are higher around july.
 
+Sales over the time
+
 <img src="reports/sales_time.png">
 
 2. The sales tend to increase throughout the week. Sunday presents the highest sales volume.
+
+Sales per day of week
 
 <img src="reports/sales_day.png">
 
 3. Stores 2 and 8 are the best ones. On average, they make more sales than the others. Stores 5, 6 and 7 are the worst ones.
 
+Average sales per store
+
 <img src="reports/sales_store.png">
 
 4. Items 28 and 15 are the most sold ones.
+
+Average sales per item
 
 <img src="reports/sales_item.png">
 
 # 7. Modelling
 1. Initially, having the data sorted by date, store and item, I did a time series train-test-split (in chronological order, ensuring that the model is trained with past data points and predicts on future data points). Once the objective was to forecast 3 months of sales, I separated 3 months for test. Finally, I did this at the beginning of the project to isolate test set, using it just for final model evaluation, simulating a real life production environment.
 
+Time series train-test-split visualization
+
 <img src="reports/time_series_split.png">
 
 2. Then, I broke the time series into its trend, seasonal, cyclical and residual components using statsmodels in order to discover underlying patterns. It was possible to observe that the series is not stationary, presents an increasing trend and has residuals distributed around zero. This was useful for the feature engineering step.
 
+Time series decomposition
+
 <img src="reports/time_series_decomposition.png">
 
 3. I implemented a time series cross validation using sklearn TimeSeriesSplit in order to compare different models trained on different data preparation / modelling approaches. Considering that we wanted to forecast 3 months of sales, I defined a 3 month test size, with a one week gap between train and test to avoid overfitting. By doing this, it was possible to obtain a more reliable performance estimate and isolate test set. 
+
+Time series cross validation visualization
 
 <img src="reports/time_series_cv.png">
 
@@ -81,11 +97,13 @@ Each of these steps is approached in detail inside the notebooks.
 5. For the data preparation step, I compared different approaches, starting from simpler to more complex ones, assessing the model's performance using time series cross validation to observe the effects of these approaches. CRISP-DM data preparation / modelling cycles were done here. I enumerated them for a good understanding.
 6. A lot of time series features were created, such as date-related features, lag features, rolling window features and exponentially weighted mean features. The windows and lags were selected based on factors like seasonality and trend. Moreover, I applied a log-transformation to the target variable because it was significantly right-skewed. By doing this, its distribution turned more symmetric and the model was able to better capture the patterns behind the data.
 
+Sales distribution before and after log-transformation
+
 <img src="reports/sales_std_log.png">
 
 7. After obtaining my prepared data data preparation / modelling CRISP-DM cycles, and verifying that machine learning was suitable for the problem by comparing it with an average model, I procceeded to hyperparameter tuning.
 
-8. I tuned the LightGBM model using bayesian search because it uses probabilistic models to intelligently explore the hyperparameter space, balancing exploration and exploitation. Optuna package was used. 
+8. I tuned the LightGBM model using bayesian search (along with time series cross validation) because it uses probabilistic models to intelligently explore the hyperparameter space, balancing exploration and exploitation. Optuna package was used, searching the best values of learning_rate, num_leaves, subsample, colsample_bytree and min_data_in_leaf. An observation here is that, once forecasting 3 months of sales is a low latency task, a higher number of estimators could be defined, like 5,000. However, I used just 1,000 due to computational limitations. 
 
 9. Once I had my final tuned model, I evaluated its results obtaining regression metrics, observing actual vs predicted values and residual plots. The mean absolute error (MAE) told us that our model's predictions, on average, are off by approximately 6.1 units of the target variable (sales). This is excellent, considering that the sales range from 0 to 231, with an average value of 52.25. Also, the residuals are normally distributed around 0, and thus this Linear Regression assumption is verified, reinforcing the estimator's quality. An observation here is that I verified that lightgbm tends to make more significant errors when predicting higher sales values. This makes sense, as a rapid increase in sales can be challenging for it to capture. Finally, the train, validation and test RMSE scores were compared and they are very similar, validating that the model was not overfitting the training data and thus, will generalize well for new unseen instances.
 
@@ -114,15 +132,17 @@ Actual vs predicted values over the 3-month period
 
 <img src="reports/actual_pred_graph_lgb.png">
 
-Actual vs predicted values plot
+Residual plot
 
 <img src="reports/residuals_dist_lgb.png">
 
-Residual plot
+Actual vs predicted values plot
 
 <img src="reports/actual_pred_lgb.png">
 
 10. Then, considering that creating lags and rolling window features is an experimental process, I looked at LightGBM feature importances. I performed a feature selection based on a 700 importance threshold. By doing this, it was possible to go from 78 to 25 features keeping the same performance. Most of the time series features didn't help too much, probably because of the quality of the data. 
+
+LightGBM feature importances 
 
 <img src="reports/feature_importances_lgb.png">
 
