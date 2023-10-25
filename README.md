@@ -100,3 +100,26 @@ Each of these steps is approached in detail inside the notebooks.
 10. Then, considering that creating lags and rolling window features is an experimental process, I looked at LightGBM feature importances. I performed a feature selection based on a 700 importance threshold. By doing this, it was possible to go from 78 to 25 features keeping the same performance. Most of the time series features didn't help too much, probably because of the quality of the data. 
 
 <img src="reports/feature_importances_lgb.png">
+
+# 8. Financial result
+A financial result was provided. The next 3 month sales were presented per store, per store and item, and for the total company considering the error and the forecasted sales sum, average, and best and worst scenarios. The company will sell 2,558,788.02 items in the next 3 months. Particularly, stores 2, 3 and 8 will sell more products, while stores 5, 6 and 7 will sell less products in this period. Finally, items 15 and 28 will be the most sold ones while item 5 will be the less sold one. The historical patterns found on eda will be preserved, illustrating how seasonality, trend and residual components are important for the forecast.
+
+Financial result per store
+
+|   store | total_predictions | average_predictions |   MAE | worst_scenario_average | best_scenario_average | worst_scenario_total | best_scenario_total |
+|--------:|------------------:|--------------------:|------:|-----------------------:|----------------------:|--------------------:|-------------------:|
+|       1 |         231857.88 |                49.86 |  5.71 |                  44.15 |                 55.57 |           231852.17 |          231863.59 |
+|       2 |         326641.98 |                70.25 |  7.10 |                  63.15 |                 77.35 |           326634.88 |          326649.08 |
+|       3 |         290908.56 |                62.56 |  6.54 |                  56.02 |                 69.10 |           290902.02 |          290915.10 |
+|       4 |         269308.36 |                57.92 |  6.38 |                  51.53 |                 64.30 |           269301.98 |          269314.75 |
+|       5 |         195426.74 |                42.03 |  5.31 |                  36.71 |                 47.34 |           195421.43 |          195432.06 |
+|       6 |         194956.50 |                41.93 |  5.23 |                  36.69 |                 47.16 |           194951.27 |          194961.73 |
+|       7 |         178273.44 |                38.34 |  4.96 |                  33.38 |                 43.30 |           178268.49 |          178278.40 |
+|       8 |         313521.02 |                67.42 |  6.90 |                  60.52 |                 74.33 |           313514.11 |          313527.92 |
+|       9 |         269951.94 |                58.05 |  6.43 |                  51.62 |                 64.49 |           269945.51 |          269958.38 |
+|      10 |         287941.59 |                61.92 |  6.41 |                  55.51 |                 68.33 |           287935.18 |          287948.01 |
+
+
+Financial result per store and item for items 1 to 5 at store 1
+
+
