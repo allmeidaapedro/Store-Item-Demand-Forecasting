@@ -3,7 +3,7 @@
 <img src="reports/store_img.jpg" width=800px height=350px>
 
 # 1. Project description
-- In this project, I performed time series forecasting using LightGBM. I predicted sales for 50 items across 10 different stores for a three-month period.
+- In this project, I performed time series forecasting using LightGBM. I predicted sales for 50 items across 10 different stores for a three-month period. The data covers 5 years (from 2013-01-01 to 2017-12-31) of sales.
 - By utilizing techniques such as time series decomposition (trend, seasonal, cyclical and residual components), time series feature engineering (creating date-related features, lag features, rolling window features and exponentially weighted features), time series train-test-split (chronological) and time series cross validation (rolling/expanding window), I was able to build a model capable of accurately forecasting sales for the next 3 months.
 - A financial result was provided. The next 3 month sales were presented per store, per store and item, and for the total company considering the error and the forecasted sales sum, average, and best and worst scenarios. The company will sell 2,558,788.02 items in the next 3 months. Particularly, stores 2, 3 and 8 will sell more products, while stores 5, 6 and 7 will sell less products in this period. Finally, items 15 and 28 will be the most sold ones while item 5 will be the less sold one. The historical patterns found on eda will be preserved, illustrating how seasonality, trend and residual components are important for the forecast.
 - The project follows a real data science workflow (based on CRISP-DM framework), encompassing tasks from data collection and exploratory data analysis (EDA) to final modeling. It includes features like exception handling, virtual environments, modular coding, code versioning (using Git and Github), and specifying requirements. By structuring it this way, I've organized the entire project as a package, making it easily reproducible by others.
@@ -122,4 +122,84 @@ Financial result per store
 
 Financial result per store and item for items 1 to 5 at store 1
 
+|   store |   item | total_predictions | average_predictions |   MAE |   worst_scenario_average |   best_scenario_average |   worst_scenario_total |   best_scenario_total |
+|--------:|-------:|------------------:|--------------------:|------:|-------------------------:|------------------------:|----------------------:|---------------------:|
+|       1 |      1 |           1969.38 |               21.18 |  3.81 |                     17.37 |                   24.99 |               1965.57 |              1973.19 |
+|       1 |      2 |           5198.82 |               55.90 |  6.46 |                     49.44 |                   62.36 |               5192.36 |              5205.28 |
+|       1 |      3 |           3278.57 |               35.25 |  4.46 |                     30.80 |                   39.71 |               3274.11 |              3283.03 |
+|       1 |      4 |           1954.92 |               21.02 |  3.33 |                     17.69 |                   24.35 |               1951.59 |              1958.25 |
+|       1 |      5 |           1653.18 |               17.78 |  3.17 |                     14.60 |                   20.95 |               1650.00 |              1656.35 |
 
+# 9. Run this project on your local machine
+To run the notebooks locally, make sure to have installed:
+
+1. Python 3.11.4
+2. pip (Python package manager)
+3. Git (Version control tool)
+4. Jupyter (Run the notebooks)
+
+Once you have this installed, open a terminal on your local machine and run the following commands:
+
+1. Clone the repository:
+<pre>
+git clone https://github.com/allmeidaapedro/Store-Item-Demand-Forecasting.git
+</pre>
+
+2. Navigate to the cloned repository directory:
+<pre>
+cd Store-Item-Demand-Forecasting
+</pre>
+
+3. Create a virtual environment:
+<pre>
+python -m venv venv
+</pre>
+
+4. Activate the Virtual Environment:
+
+Activate the virtual environment used to isolate the project dependencies.
+<pre>
+source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
+</pre>
+
+5. Install Dependencies:
+
+Use pip to install the required dependencies listed in the requirements.txt file.
+<pre>
+pip install -r requirements.txt
+</pre>
+
+6. Start Jupyter Notebook:
+
+To start Jupyter Notebook, run the following command:
+<pre>
+jupyter notebook
+</pre>
+This will open a new tab or window in your web browser with the Jupyter Notebook interface.
+
+7. Navigate to the 'notebooks' folder:
+
+Use the Jupyter Notebook interface to navigate to the 'notebooks' folder within your project directory.
+
+8. Open and Run Notebooks:
+
+You should see the 'eda.ipynb' and 'modelling.ipynb' notebooks listed. Click on the notebook you want to run to open it. Once it's open, you can run individual cells or the entire notebook by clicking the "Run" button.
+
+9. Deactivate the Virtual Environment (Optional):
+
+When you're done working with the notebooks and want to exit the virtual environment, you can deactivate it using the following command:
+
+<pre>
+deactivate
+</pre>
+
+# 10. Dataset link
+The dataset was collected from kaggle
+Link: https://www.kaggle.com/competitions/demand-forecasting-kernels-only/overview
+
+# 11. Contact me
+Linkedin: https://www.linkedin.com/in/pedro-henrique-almeida-oliveira-77b44b237/
+
+Github: https://github.com/allmeidaapedro
+
+Gmail: pedrooalmeida.net@gmail.com
