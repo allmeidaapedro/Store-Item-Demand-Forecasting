@@ -96,3 +96,7 @@ Each of these steps is approached in detail inside the notebooks.
 <img src="reports/actual_pred_graph_lgb.png">
 <img src="reports/residuals_dist_lgb.png">
 <img src="reports/actual_pred_lgb.png">
+
+10. Then, considering that creating lags and rolling window features is an experimental process, I looked at LightGBM feature importances. I performed a feature selection based on a 700 importance threshold. By doing this, it was possible to go from 78 to 25 features keeping the same performance. Most of the time series features didn't help too much, probably because of the quality of the data. 
+
+<img src="reports/feature_importances_lgb.png">
