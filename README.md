@@ -87,14 +87,39 @@ Each of these steps is approached in detail inside the notebooks.
 
 8. I tuned the LightGBM model using bayesian search because it uses probabilistic models to intelligently explore the hyperparameter space, balancing exploration and exploitation. Optuna package was used. 
 
-9. Once I had my final tuned model, I evaluated its results obtaining regression metrics, observing actual vs predicted values and residual plots. The mean absolute error (MAE) told us that our model's predictions, on average, are off by approximately 6.1 units of the target variable (sales). This is excellent, considering that the sales range from 0 to 231, with an average value of 52.25. Moreover, the train, validation and test RMSE scores were compared and they are very similar, validating that the model was not overfitting the training data and thus, will generalize well for new unseen instances.
+9. Once I had my final tuned model, I evaluated its results obtaining regression metrics, observing actual vs predicted values and residual plots. The mean absolute error (MAE) told us that our model's predictions, on average, are off by approximately 6.1 units of the target variable (sales). This is excellent, considering that the sales range from 0 to 231, with an average value of 52.25. Also, the residuals are normally distributed around 0, and thus this Linear Regression assumption is verified, reinforcing the estimator's quality. An observation here is that I verified that lightgbm tends to make more significant errors when predicting higher sales values. This makes sense, as a rapid increase in sales can be challenging for it to capture. Finally, the train, validation and test RMSE scores were compared and they are very similar, validating that the model was not overfitting the training data and thus, will generalize well for new unseen instances.
+
+LightGBM final model results
 
 |        | Model    | MAE     | MAPE    | RMSE   | R2     |
 |--------|----------|---------|---------|--------|--------|
 | Results| LightGBM | 6.0958  | 13.2804 | 7.9709 | 0.9222 |
 
+Some random actual vs predicted value
+
+| Date       | Actual | Prediction | Residual |
+|------------|--------|------------|----------|
+| 2017-10-14 | 100.0  | 92.34      | 7.66     |
+| 2017-12-13 | 17.0   | 19.37      | 2.37     |
+| 2017-11-11 | 50.0   | 61.96      | 11.96    |
+| 2017-11-28 | 56.0   | 47.58      | 8.42     |
+| 2017-11-04 | 31.0   | 32.16      | 1.16     |
+| 2017-11-11 | 40.0   | 40.47      | 0.47     |
+| 2017-11-09 | 101.0  | 96.19      | 4.81     |
+| 2017-11-06 | 16.0   | 15.75      | 0.25     |
+| 2017-12-14 | 50.0   | 51.88      | 1.88     |
+| 2017-10-10 | 34.0   | 38.12      | 4.12     |
+
+Actual vs predicted values over the 3-month period
+
 <img src="reports/actual_pred_graph_lgb.png">
+
+Actual vs predicted values plot
+
 <img src="reports/residuals_dist_lgb.png">
+
+Residual plot
+
 <img src="reports/actual_pred_lgb.png">
 
 10. Then, considering that creating lags and rolling window features is an experimental process, I looked at LightGBM feature importances. I performed a feature selection based on a 700 importance threshold. By doing this, it was possible to go from 78 to 25 features keeping the same performance. Most of the time series features didn't help too much, probably because of the quality of the data. 
