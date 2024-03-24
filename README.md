@@ -87,23 +87,25 @@ Time series decomposition
 
 <img src="reports/time_series_decomposition.png">
 
-3. I implemented a time series cross validation using sklearn TimeSeriesSplit in order to compare different models trained on different data preparation / modelling approaches. Considering that we wanted to forecast 3 months of sales, I defined a 3 month test size, with a one week gap between train and test to avoid overfitting. By doing this, it was possible to obtain a more reliable performance estimate and isolate test set. 
+3. I implemented a time series cross validation using sklearn TimeSeriesSplit in order to compare different models trained on different data preparation/modelling approaches. Considering that we wanted to forecast 3 months of sales, I defined a 3 month test size, with a one week gap between train and test to avoid overfitting. By doing this, it was possible to obtain a more reliable performance estimate and isolate test set. 
 
 Time series cross validation visualization
 
 <img src="reports/time_series_cv.png">
 
 4. I chose LightGBM for modelling because I was focusing on the predictive power. Moreover, LightGBM is fast to train, and offers some data preparation advantages, such as dealing with missing values (the lag features, rolling window features and exponentially moving averages added a lot of missings) and non-sensitivity to scaling. Finally, it is capable of detecting nonlinear complex relationships in the data, as opposed to Linear Regression, for example.
-5. For the data preparation step, I compared different approaches, starting from simpler to more complex ones, assessing the model's performance using time series cross validation to observe the effects of these approaches. CRISP-DM data preparation / modelling cycles were done here. I enumerated them for a good understanding.
+5. For the data preparation step, I compared different approaches, starting from simpler to more complex ones, assessing the model's performance using time series cross validation to observe the effects of these approaches. CRISP-DM data preparation/modelling cycles were done here. I enumerated them for a good understanding.
 6. A lot of time series features were created, such as date-related features, lag features, rolling window features and exponentially weighted mean features. The windows and lags were selected based on factors like seasonality and trend. Moreover, I applied a log-transformation to the target variable because it was significantly right-skewed. By doing this, its distribution turned more symmetric and the model was able to better capture the patterns behind the data.
 
 Sales distribution before and after log-transformation
 
 <img src="reports/sales_std_log.png">
 
-7. After obtaining my prepared data from data preparation / modelling CRISP-DM cycles, and verifying that machine learning was suitable for the problem by comparing it with an average model, I procceeded to hyperparameter tuning.
+7. After obtaining my prepared data from data preparation/modelling CRISP-DM cycles, and verifying that machine learning was suitable for the problem by comparing it with an average model, I procceeded to feature selection and hyperparameter tuning.
 
-8. I tuned the LightGBM model using bayesian search (along with time series cross validation) because it uses probabilistic models to intelligently explore the hyperparameter space, balancing exploration and exploitation. Optuna package was used, searching the best values of learning_rate, num_leaves, subsample, colsample_bytree and min_data_in_leaf. An observation here is that, once forecasting 3 months of sales is a low latency task, a higher number of estimators could be defined, like 5,000. However, I used just 1,000 due to computational limitations. 
+8. I applied feature selection with the Recursive Feature Elimination (RFE) technique (along with time series cross validation), which recursively select a subset of features with highest feature importances until the desired number of features is reached. As a result, 31 of the 85 variables were selected, including a lot of variables created in feature engineering step, ilustrating the importance of this task.
+
+9. I tuned the LightGBM model using bayesian search (along with time series cross validation) because it uses probabilistic models to intelligently explore the hyperparameter space, balancing exploration and exploitation. Optuna package was used, searching the best values of learning_rate, num_leaves, subsample, colsample_bytree and min_data_in_leaf. An observation here is that, once forecasting 3 months of sales is a low latency task, a higher number of estimators could be defined, like 5,000. However, I used just 1,000 due to computational limitations. 
 
 9. Once I had my final tuned model, I evaluated its results obtaining regression metrics, observing actual vs predicted values and residual plots. The mean absolute error (MAE) told us that our model's predictions, on average, are off by approximately 6.1 units of the target variable (sales). This is excellent, considering that the sales range from 0 to 231, with an average value of 52.25. Also, the residuals are normally distributed around 0, and thus this Linear Regression assumption is verified, reinforcing the estimator's quality. An observation here is that I verified that lightgbm tends to make more significant errors when predicting higher sales values. This makes sense, as a rapid increase in sales can be challenging for it to capture. Finally, the train, validation and test RMSE scores were compared and they are very similar, validating that the model was not overfitting the training data and thus, will generalize well for new unseen instances.
 
@@ -111,7 +113,7 @@ LightGBM final model results
 
 |        | Model    | MAE     | MAPE    | RMSE   | R2     |
 |--------|----------|---------|---------|--------|--------|
-| Results| LightGBM | 6.0958  | 13.2804 | 7.9709 | 0.9222 |
+| Results| LightGBM | 6.0979  | 13.2891 | 7.9741 | 0.9221 |
 
 Some random actual vs predicted value
 
@@ -140,11 +142,11 @@ Actual vs predicted values plot
 
 <img src="reports/actual_pred_lgb.png">
 
-10. Then, considering that creating lags and rolling window features is an experimental process, I looked at LightGBM feature importances. I performed a feature selection based on a 700 importance threshold. By doing this, it was possible to go from 78 to 25 features keeping the same performance. Most of the time series features didn't help too much, probably because of the quality of the data. 
+10. Then, I interpreted the model's results through SHAP values and LightGBM feature importances. Month, dayofweek, item and dayofyear are some of the most determinant features. This makes sense, since we have seasonality, with sales being higher in july and on sundays and items that are sold more or less. Two year, one year and a half and one year rolling mean features and exponentially weighted mean features presented a high predictive power! This ilustrates the importance of time series feature engineering when building a machine learning model for forecasting. Some rolling standard deviation variables were also significantly important, like sales_roll_std_365
 
 LightGBM feature importances 
 
-<img src="reports/feature_importances_lgb.png">
+<img src="reports/feature_importances.png">
 
 # 8. Financial result
 A financial result was provided. The next 3 month sales were presented per store, per store and item, and for the total company considering the error and the forecasted sales sum, average, and best and worst scenarios. The company will sell 2,558,788.02 items in the next 3 months. Particularly, stores 2, 3 and 8 will sell more products, while stores 5, 6 and 7 will sell less products in this period. Finally, items 15 and 28 will be the most sold ones while item 5 will be the less sold one. The historical patterns found on eda will be preserved, illustrating how seasonality, trend and residual components are important for the forecast.
