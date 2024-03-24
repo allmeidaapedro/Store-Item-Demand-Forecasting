@@ -243,7 +243,7 @@ The dataset was collected from kaggle
 Link: https://www.kaggle.com/competitions/demand-forecasting-kernels-only/overview
 
 # 11. Contact me
-Linkedin: https://www.linkedin.com/in/pedro-henrique-almeida-oliveira-77b44b237/
+Linkedin: https://www.linkedin.com/in/pedro-almeida-ds/
 
 Github: https://github.com/allmeidaapedro
 
