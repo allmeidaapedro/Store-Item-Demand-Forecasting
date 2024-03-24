@@ -22,14 +22,14 @@ Each folder/file content and purpose is described below:
 - Requirements, setup, gitignore, readme: The file setup.py allows me to build my entire project as a package, containing metadata and so on. Moreover, requirements.txt list all the dependencies needed for the project with the specific versions for reproducibility. Gitignore allows me to hide irrelevant information from commits and I am using readme.md for documentation and storytelling.
 
 # 4. Business problem and project objectives
-We are asked to forecast sales for 50 items across 10 different stores over a three-month period.
+A retail store manager is strategizing to manage inventory and investments across 10 stores for 50 products, aiming to meet customer demand effectively. By employing predictive analytics, they aim to improve sales predictions, maintain product availability, and boost overall store performance.
 
-Sales forecasting for 50 items across 10 stores over a three-month period involves utilizing historical sales data, market trends, and store-specific variables to predict future sales levels. This process enables businesses to strategically manage inventory, allocate resources effectively, and optimize sales strategies for each item and store, maximizing overall revenue and profitability.
-
-Considering everything mentioned above, the project objectives are:
+Considering this, the project objectives are:
 1. Identify valuable business insights about sales over time, like seasonal patterns, trends and general characteristics.
 2. Construct a model able to accurately predict the sales for 50 items across 10 stores over a three-month period.
 3. Determine financial results given by the project.
+
+The project's financial outcomes will enable the manager to effectively oversee inventory and plan investments for growth, ensuring they meet customer demand and enhance overall store performance.
 
 As a result, the business problem will be resolved.
 

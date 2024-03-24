@@ -68,6 +68,7 @@ def plot_time_series_split(train, test, cutoff_date):
         plt.title('Time Series Train-Test-Split')
         plt.xlabel('Date')
         plt.ylabel('Sales')
+        plt.legend(loc='upper left')
         plt.show()
     
     except Exception as e:
