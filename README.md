@@ -58,19 +58,19 @@ Sales over the time
 
 2. The sales tend to increase throughout the week. Sunday presents the highest sales volume.
 
-Sales per day of week
+Sales over the week
 
 <img src="reports/sales_day.png">
 
-3. Stores 2 and 8 are the best ones. On average, they make more sales than the others. Stores 5, 6 and 7 are the worst ones.
+3. Stores 2 and 8 are the best ones. They tend to make more sales than the others. Stores 5, 6 and 7 are the worst ones.
 
-Average sales per store
+Sales distribution per store
 
 <img src="reports/sales_store.png">
 
-4. Items 28 and 15 are the most sold ones.
+4. Items 28 and 15 tend to be the most sold ones.
 
-Average sales per item
+Sales distribution per item
 
 <img src="reports/sales_item.png">
 
