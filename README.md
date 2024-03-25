@@ -174,6 +174,7 @@ Total financial result
 |-------------------------------|-----------------------------------------|-------------------|---------------------------------------------|-------------------------------------------|------------------------------------|----------------------------------|
 | 2559998                       | 27527                                   | 404               | 27123                                       | 27931                                     | 2522455                            | 2597542                          |
 
+Interpretation: The company is expected to sell a total of 2,559,998 items over the next 3 months, averaging about 27,527 items per day. With some possible errors, this number might change by around 404 items. So, on bad days, it might sell 27,123 items, and on good days, it might sell 27,931 items. In total, over the 3 months, it could sell between 2,522,455 and 2,597,542, depending on how sales go.
 
 # 9. Run this project on your local machine
 To run the notebooks locally, make sure to have installed:
