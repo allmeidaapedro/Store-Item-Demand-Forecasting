@@ -149,34 +149,31 @@ LightGBM feature importances
 <img src="reports/feature_importances.png">
 
 # 8. Financial result
-A financial result was provided. The next 3 month sales were presented per store, per store and item, and for the total company considering the error and the forecasted sales sum, average, and best and worst scenarios. The company will sell 2,558,788.02 items in the next 3 months. Particularly, stores 2, 3 and 8 will sell more products, while stores 5, 6 and 7 will sell less products in this period. Finally, items 15 and 28 will be the most sold ones while item 5 will be the less sold one. The historical patterns found on eda will be preserved, illustrating how seasonality, trend and residual components are important for the forecast.
+A financial result was provided. The next 3 month sales were presented per store, per store and item, and for the total company considering the error and the forecasted sales sum, average, and best and worst scenarios. The company will sell 2,559,998 items in the next 3 months. Particularly, stores 2, 3 and 8 will sell more products, while stores 5, 6 and 7 will sell less products in this period. Finally, items 15 and 28 will be the most sold ones while item 5 will be the less sold one. The historical patterns found on eda will be preserved, illustrating how seasonality, trend and residual components are important for the forecast.
 
 Financial result per store
 
 | Store | Total predicted sales | Average predicted sales (daily) | Daily MAE | Worst average sales scenario (daily) | Best average sales scenario (daily) | Worst total sales scenario | Best total sales scenario |
 |-------|-----------------------|---------------------------------|-----------|--------------------------------------|------------------------------------|-----------------------------|---------------------------|
-| 1     | 232104.77             | 2495.75                         | 55.85     | 2439.90                              | 2551.60                            | 226910.28                   | 237299.26                 |
-| 2     | 326805.43             | 3514.04                         | 69.55     | 3444.49                              | 3583.59                            | 320337.31                   | 333273.54                 |
-| 3     | 290955.32             | 3128.55                         | 64.71     | 3063.84                              | 3193.26                            | 284937.04                   | 296973.60                 |
-| 4     | 269450.20             | 2897.31                         | 61.67     | 2835.64                              | 2958.98                            | 263714.80                   | 275185.60                 |
-| 5     | 195448.24             | 2101.59                         | 53.92     | 2047.67                              | 2155.51                            | 190433.62                   | 200462.86                 |
-| 6     | 194992.84             | 2096.70                         | 50.44     | 2046.26                              | 2147.14                            | 190302.03                   | 199683.65                 |
-| 7     | 178348.42             | 1917.72                         | 43.32     | 1874.41                              | 1961.04                            | 174320.06                   | 182376.78                 |
-| 8     | 313747.07             | 3373.62                         | 62.29     | 3311.33                              | 3435.92                            | 307954.03                   | 319540.11                 |
-| 9     | 270084.31             | 2904.13                         | 66.26     | 2837.87                              | 2970.39                            | 263921.92                   | 276246.70                 |
-| 10    | 288061.61             | 3097.44                         | 70.65     | 3026.78                              | 3168.09                            | 281490.78                   | 294632.45                 |
+| 1     | 232105                | 2496                            | 56        | 2440                                 | 2552                               | 226910                      | 237299                    |
+| 2     | 326805                | 3514                            | 70        | 3444                                 | 3584                               | 320337                      | 333274                    |
+| 3     | 290955                | 3129                            | 65        | 3064                                 | 3193                               | 284937                      | 296974                    |
+| 4     | 269450                | 2897                            | 62        | 2836                                 | 2959                               | 263715                      | 275186                    |
+| 5     | 195448                | 2102                            | 54        | 2048                                 | 2156                               | 190434                      | 200463                    |
+| 6     | 194993                | 2097                            | 50        | 2046                                 | 2147                               | 190302                      | 199684                    |
+| 7     | 178348                | 1918                            | 43        | 1874                                 | 1961                               | 174320                      | 182377                    |
+| 8     | 313747                | 3374                            | 62        | 3311                                 | 3436                               | 307954                      | 319540                    |
+| 9     | 270084                | 2904                            | 66        | 2838                                 | 2970                               | 263922                      | 276247                    |
+| 10    | 288062                | 3097                            | 71        | 3027                                 | 3168                               | 281491                      | 294632                    |
 
+Interpretation: Store 2 is expected to sell 326,805 items over the next 3 months, averaging about 3,514 items per day. With some possible errors, this number might change by around 70 items. So, on bad days, it might sell 3,444 items, and on good days, it might sell 3,583 items. In total, over the 3 months, it could sell between 320,337 and 333,273 items, depending on how sales go.
 
+Total financial result
 
-Financial result per store and item for items 1 to 5 at store 1
+| Overall total predicted sales | Overall average predicted sales (daily) | Overall daily MAE | Overall worst average sales scenario (daily) | Overall best average sales scenario (daily) | Overall worst total sales scenario | Overall best total sales scenario |
+|-------------------------------|-----------------------------------------|-------------------|---------------------------------------------|-------------------------------------------|------------------------------------|----------------------------------|
+| 2559998                       | 27527                                   | 404               | 27123                                       | 27931                                     | 2522455                            | 2597542                          |
 
-|   store |   item | total_predictions | average_predictions |   MAE |   worst_scenario_average |   best_scenario_average |   worst_scenario_total |   best_scenario_total |
-|--------:|-------:|------------------:|--------------------:|------:|-------------------------:|------------------------:|----------------------:|---------------------:|
-|       1 |      1 |           1969.38 |               21.18 |  3.81 |                     17.37 |                   24.99 |               1965.57 |              1973.19 |
-|       1 |      2 |           5198.82 |               55.90 |  6.46 |                     49.44 |                   62.36 |               5192.36 |              5205.28 |
-|       1 |      3 |           3278.57 |               35.25 |  4.46 |                     30.80 |                   39.71 |               3274.11 |              3283.03 |
-|       1 |      4 |           1954.92 |               21.02 |  3.33 |                     17.69 |                   24.35 |               1951.59 |              1958.25 |
-|       1 |      5 |           1653.18 |               17.78 |  3.17 |                     14.60 |                   20.95 |               1650.00 |              1656.35 |
 
 # 9. Run this project on your local machine
 To run the notebooks locally, make sure to have installed:
